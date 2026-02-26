@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Personal Portfolio</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Welcome to My Portfolio</h1>
+</header>
+
+<main>
+
+<section>
+    <h2>About Me</h2>
+    <p>
+        This webpage is a simple HTML5 project created for my Coursera final assignment.
+        It demonstrates correct use of semantic HTML, accessibility, and validation rules.
+    </p>
+</section>
+
+<section>
+    <h2>My Interests</h2>
+    <ul>
+        <li>Web Development</li>
+        <li>Software Engineering</li>
+        <li>Learning New Technologies</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Gallery</h2>
+
+    <img src="image1.jpg" alt="Laptop placed on a desk showing HTML code on screen">
+    <img src="image2.jpg" alt="Notebook and pen used for planning web projects">
+    <img src="image3.jpg" alt="Clean workspace with computer setup for coding">
+
+</section>
+
+<section>
+    <h2>Useful Resource</h2>
+    <p>
+        Learn more about HTML at 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">
+            MDN Web Docs
+        </a>.
+    </p>
+</section>
+
+</main>
+
+<footer>
+    <p>© 2026 My HTML Project</p>
+</footer>
+
+</body>
+</html>
