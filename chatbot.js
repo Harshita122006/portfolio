@@ -22,19 +22,15 @@ response = "You can apply through the Garden City University admission portal.";
 }
 
 else if(input.includes("course")){
-response = "GCU offers programs like BCA, BBA, BCom and many postgraduate courses.";
+response = "We offer BCA, BBA, BCom and many postgraduate courses.";
 }
 
 else if(input.includes("fee")){
-response = "Fee details are available on the admissions section of the university website.";
+response = "Fee details are available in the admissions section.";
 }
 
 else if(input.includes("hostel")){
-response = "Yes, Garden City University provides hostel facilities for students.";
-}
-
-else if(input.includes("location")){
-response = "Garden City University is located in Bangalore, Karnataka.";
+response = "Yes, hostel facilities are available for students.";
 }
 
 chatbox.innerHTML += "<div class='bot'>" + response + "</div>";
