@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>University Chatbot</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f4f4f4;
+}
+
+.chat-container{
+width:350px;
+margin:50px auto;
+border:1px solid #ccc;
+background:white;
+border-radius:10px;
+overflow:hidden;
+}
+
+.chat-header{
+background:#003366;
+color:white;
+padding:10px;
+text-align:center;
+font-weight:bold;
+}
+
+.chat-box{
+height:300px;
+overflow-y:auto;
+padding:10px;
+}
+
+.bot{
+background:#e6e6e6;
+padding:8px;
+margin:5px;
+border-radius:5px;
+}
+
+.user{
+background:#cce5ff;
+padding:8px;
+margin:5px;
+border-radius:5px;
+text-align:right;
+}
+
+.input-area{
+display:flex;
+border-top:1px solid #ccc;
+}
+
+input{
+flex:1;
+padding:10px;
+border:none;
+outline:none;
+}
+
+button{
+padding:10px;
+background:#003366;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#0055aa;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<div class="chat-header">
+University Chatbot
+</div>
+
+<div id="chatbox" class="chat-box">
+<div class="bot">Hello! Ask me about admission, courses, fees, hostel or location.</div>
+</div>
+
+<div class="input-area">
+<input id="userInput" type="text" placeholder="Ask a question...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+let input = document.getElementById("userInput").value.toLowerCase();
+let chatbox = document.getElementById("chatbox");
+
+chatbox.innerHTML += "<div class='user'>" + input + "</div>";
+
+let response = "Sorry, I don't understand your question.";
+
+if(input.includes("admission")){
+response = "You can apply through the university admission portal on the official website.";
+}
+
+else if(input.includes("course")){
+response = "We offer courses like BCA, BBA, BCom and other undergraduate programs.";
+}
+
+else if(input.includes("fee")){
+response = "Fee details are available on the university website under the admissions section.";
+}
+
+else if(input.includes("hostel")){
+response = "Yes, hostel facilities are available for both boys and girls.";
+}
+
+else if(input.includes("location")){
+response = "The university is located in Bangalore. You can check Google Maps for directions.";
+}
+
+chatbox.innerHTML += "<div class='bot'>" + response + "</div>";
+
+document.getElementById("userInput").value = "";
+
+chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>
