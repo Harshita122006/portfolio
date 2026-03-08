@@ -1,100 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Garden City University</title>
+<title>University Chatbot</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- Navbar -->
-
-<nav>
-<h2>Garden City University</h2>
-
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Courses</a></li>
-<li><a href="#">Admissions</a></li>
-<li><a href="#">Contact</a></li>
-</ul>
-</nav>
-
-<!-- Hero Section -->
-
-<section class="hero">
-
-<h1>Welcome to Garden City University</h1>
-
-<p>Empowering students with knowledge, innovation and leadership.</p>
-
-<button>Apply Now</button>
-
-</section>
-
-<!-- Courses -->
-
-<section class="courses">
-
-<h2>Our Popular Programs</h2>
-
-<div class="course-container">
-
-<div class="card">
-<h3>BCA</h3>
-<p>Learn programming, web development and software engineering.</p>
-</div>
-
-<div class="card">
-<h3>BBA</h3>
-<p>Build leadership and business management skills.</p>
-</div>
-
-<div class="card">
-<h3>BCom</h3>
-<p>Study accounting, finance and economics.</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- About -->
-
-<section class="about">
-
-<h2>About Garden City University</h2>
-
-<p>
-Garden City University is one of Bangalore’s leading institutions,
-providing high-quality education and modern campus facilities.
-</p>
-
-</section>
+<h1>Garden City University</h1>
+<p>Welcome to our official website.</p>
 
 <!-- Chatbot Button -->
-
-<div id="chatbot-icon" onclick="toggleChat()">
+<div class="chat-icon" onclick="toggleChat()">
 💬
 </div>
 
-<!-- Chatbot -->
-
-<div id="chatbot">
+<!-- Chatbot Window -->
+<div class="chatbot" id="chatbot">
 
 <div class="chat-header">
-University Assistant
-<span onclick="toggleChat()">✖</span>
+<img src="https://i.imgur.com/7k12EPD.png" class="avatar">
+<div>
+<b>Akshara</b>
+<p>Garden City University</p>
 </div>
 
-<div id="chatbox" class="chat-box">
-<div class="bot">
-Hello! Ask me about admission, courses, fees or hostel.
-</div>
+<span class="close" onclick="toggleChat()">✖</span>
 </div>
 
-<div class="input-area">
-<input id="userInput" placeholder="Ask something...">
+<div class="chat-body" id="chatbox">
+
+<div class="bot-msg">
+Good Afternoon! Welcome to <b>Garden City University.</b>
+</div>
+
+<div class="bot-msg">
+Nothing is more powerful and liberating than knowledge!
+</div>
+
+<div class="bot-msg">
+I am Akshara, your digital guide.  
+I can help you with admission, hostel, fees and more.
+</div>
+
+<div class="bot-msg">
+So, how would you like to proceed?
+</div>
+
+</div>
+
+<div class="chat-input">
+<input type="text" id="userInput" placeholder="Ask something...">
 <button onclick="sendMessage()">Send</button>
 </div>
 
