@@ -1,9 +1,4 @@
-body{
-font-family:Arial;
-margin:40px;
-}
-
-/* Chat Icon */
+/* Chatbot Icon */
 
 .chat-icon{
 position:fixed;
@@ -15,9 +10,10 @@ padding:15px;
 border-radius:50%;
 cursor:pointer;
 font-size:22px;
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* Chatbot */
+/* Chatbot Window */
 
 .chatbot{
 position:fixed;
@@ -26,9 +22,10 @@ right:20px;
 width:320px;
 background:white;
 border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,0.3);
+box-shadow:0 4px 20px rgba(0,0,0,0.3);
 display:none;
 flex-direction:column;
+overflow:hidden;
 }
 
 /* Header */
@@ -40,8 +37,6 @@ padding:12px;
 display:flex;
 align-items:center;
 gap:10px;
-border-top-left-radius:12px;
-border-top-right-radius:12px;
 }
 
 .avatar{
@@ -52,9 +47,10 @@ border-radius:50%;
 .close{
 margin-left:auto;
 cursor:pointer;
+font-size:18px;
 }
 
-/* Chat body */
+/* Chat Body */
 
 .chat-body{
 height:300px;
@@ -62,6 +58,8 @@ overflow-y:auto;
 padding:15px;
 background:#f5f5f5;
 }
+
+/* Messages */
 
 .bot-msg{
 background:#ddd;
@@ -72,7 +70,7 @@ max-width:80%;
 }
 
 .user-msg{
-background:#cfe2ff;
+background:#cce5ff;
 padding:10px;
 border-radius:12px;
 margin-bottom:10px;
