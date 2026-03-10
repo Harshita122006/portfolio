@@ -1,46 +1,112 @@
-<!-- Chatbot Icon -->
-<div class="chat-icon" onclick="toggleChat()">💬</div>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Garden City University</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-<!-- Chatbot Window -->
-<div class="chatbot" id="chatbot">
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+<h2>Garden City University</h2>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Courses</a></li>
+<li><a href="#">Admissions</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</nav>
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+<h1>Welcome to Garden City University</h1>
+
+<p>Empowering students with knowledge, innovation and leadership.</p>
+
+<button>Apply Now</button>
+
+</section>
+
+<!-- COURSES -->
+
+<section class="courses">
+
+<h2>Our Popular Programs</h2>
+
+<div class="course-container">
+
+<div class="card">
+<h3>BCA</h3>
+<p>Learn programming, web development and software engineering.</p>
+</div>
+
+<div class="card">
+<h3>BBA</h3>
+<p>Build leadership and business management skills.</p>
+</div>
+
+<div class="card">
+<h3>BCom</h3>
+<p>Study accounting, finance and economics.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about">
+
+<h2>About Garden City University</h2>
+
+<p>
+Garden City University is one of Bangalore’s leading institutions,
+providing high-quality education and modern campus facilities.
+</p>
+
+</section>
+
+
+<!-- NOVA CHATBOT ICON -->
+
+<div id="chatbot-icon" onclick="toggleNova()">
+💬
+</div>
+
+
+<!-- NOVA CHATBOT -->
+
+<div id="nova">
 
 <div class="chat-header">
-<img src="https://i.imgur.com/7k12EPD.png" class="avatar">
-
-<div>
-<b>Nova</b>
-<p>Garden City University</p>
+Nova – University Assistant
+<span onclick="toggleNova()">✖</span>
 </div>
 
-<span class="close" onclick="toggleChat()">✖</span>
+<div id="chatbox" class="chat-box">
+<div class="bot">
+Hello! I'm Nova 🤖  
+I can help you with admissions, courses, fees, hostel and location.
+</div>
 </div>
 
-<div class="chat-body" id="chatbox">
-
-<div class="bot-msg">
-Good Afternoon! Welcome to <b>Garden City University.</b>
-</div>
-
-<div class="bot-msg">
-Nothing is more powerful and liberating than knowledge!
-</div>
-
-<div class="bot-msg">
-I am <b>Nova</b>, your digital guide.  
-I can help you with admission, courses, hostel, fees and more.
-</div>
-
-<div class="bot-msg">
-So, how would you like to proceed?
-</div>
-
-</div>
-
-<div class="chat-input">
-<input type="text" id="userInput" placeholder="Ask Nova something...">
+<div class="input-area">
+<input id="userInput" placeholder="Ask Nova something...">
 <button onclick="sendMessage()">Send</button>
 </div>
 
 </div>
 
-<script src="chatbot.js"></script>
+
+<!-- CONNECT JAVASCRIPT -->
+
+<script src="nova.js"></script>
+
+</body>
+</html>
