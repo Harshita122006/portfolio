@@ -1,164 +1,697 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
+/* ==========================================================================
+   GARDEN CITY UNIVERSITY — STYLESHEET
+   Organized into sections. Search for the "====" banners to jump around.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. DESIGN TOKENS (CSS custom properties)
+   Every color/spacing choice in this file traces back to one of these,
+   so the whole site can be re-themed by editing values in one place.
+   ========================================================================== */
+:root {
+  /* Brand colors — deep academic navy + warm gold, on an ivory page */
+  --navy-950: #08132B;   /* darkest navy, used for footer / deep shadows */
+  --navy-900: #0B1E3F;   /* primary brand navy (navbar, headings on light bg) */
+  --navy-700: #16305C;   /* lighter navy, used in gradients */
+  --gold-500: #D4A62A;   /* primary gold accent (CTAs, highlights) */
+  --gold-300: #E8C468;   /* lighter gold, used for hover states */
+  --ivory-50: #F8F7F4;   /* page background */
+  --white:    #FFFFFF;
+  --slate-600: #55607A;  /* secondary/body text on light backgrounds */
+  --slate-900: #1B2233;  /* primary body text */
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif; /* headings */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; /* body/UI */
+
+  /* Shape + shadow, reused across cards/buttons/panels for consistency */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --shadow-soft: 0 8px 24px rgba(11, 30, 63, 0.08);
+  --shadow-lifted: 0 16px 40px rgba(11, 30, 63, 0.16);
+
+  /* Fixed navbar height, referenced by JS scroll calculations too */
+  --nav-height: 76px;
 }
 
-/* NAVBAR */
-
-nav{
-display:flex;
-justify-content:space-between;
-padding:15px 40px;
-background:#002855;
-color:white;
+/* ==========================================================================
+   2. RESET / BASE
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav ul{
-display:flex;
-list-style:none;
+html {
+  scroll-behavior: smooth; /* native smooth scroll for the # nav links */
+  scroll-padding-top: var(--nav-height); /* so sections don't hide under the fixed navbar */
 }
 
-nav ul li{
-margin-left:20px;
+body {
+  font-family: var(--font-body);
+  color: var(--slate-900);
+  background: var(--ivory-50);
+  line-height: 1.6;
 }
 
-nav a{
-color:white;
-text-decoration:none;
+h1, h2, h3 {
+  font-family: var(--font-display);
 }
 
-/* HERO */
-
-.hero{
-height:60vh;
-background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
-background-size:cover;
-color:white;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
+/* Shared button styles, extended by .btn-gold below.
+   Kept generic here so later sections (hero, admissions, etc.) can reuse it. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.hero h1{
-font-size:40px;
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+  color: var(--navy-950);
+  box-shadow: 0 6px 18px rgba(212, 166, 42, 0.35);
 }
 
-.hero button{
-margin-top:20px;
-padding:12px 25px;
-background:#ffcc00;
-border:none;
-font-size:16px;
-cursor:pointer;
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(212, 166, 42, 0.45);
 }
 
-/* COURSES */
+/* ==========================================================================
+   3. NAVBAR
+   Fixed, glassmorphic bar. It sits above everything (z-index) and gets a
+   slightly stronger tint/shadow once the page is scrolled (see script.js,
+   which toggles the "scrolled" class on #navbar).
+   ========================================================================== */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
 
-.courses{
-padding:50px;
-text-align:center;
+  /* Glassmorphism: translucent navy + blur of whatever scrolls behind it */
+  background: rgba(11, 30, 63, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: background 0.35s ease, box-shadow 0.35s ease, height 0.35s ease;
 }
 
-.course-container{
-display:flex;
-justify-content:center;
-gap:20px;
-margin-top:30px;
+/* Applied by JS once window.scrollY > 10px — deepens the glass so text
+   stays readable over busy hero imagery, and adds a subtle lift shadow. */
+#navbar.scrolled {
+  background: rgba(8, 19, 43, 0.85);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-width:250px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+.nav-inner {
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* ABOUT */
-
-.about{
-background:#f5f5f5;
-padding:40px;
-text-align:center;
+/* --- Logo / seal --------------------------------------------------------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
 }
 
-/* CHATBOT ICON */
-
-#chatbot-icon{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#002855;
-color:white;
-font-size:24px;
-padding:15px;
-border-radius:50%;
-cursor:pointer;
+.seal {
+  display: inline-flex;
+  transform-origin: center;
+  animation: seal-rotate 18s linear infinite; /* slow ambient rotation — the "signature" motif */
 }
 
-/* NOVA CHATBOT */
-
-#nova{
-position:fixed;
-bottom:80px;
-right:20px;
-width:320px;
-background:white;
-border-radius:10px;
-box-shadow:0 4px 15px rgba(0,0,0,0.2);
-display:none;
-flex-direction:column;
+@keyframes seal-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-.chat-header{
-background:#002855;
-color:white;
-padding:10px;
-display:flex;
-justify-content:space-between;
+.seal-ring {
+  stroke: var(--gold-500);
 }
 
-.chat-box{
-height:250px;
-overflow-y:auto;
-padding:10px;
+.seal-ring-dashed {
+  stroke: rgba(232, 196, 104, 0.55);
 }
 
-.bot{
-background:#eee;
-padding:8px;
-margin:5px;
-border-radius:5px;
+.seal-letters {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--white);
+  /* Counter-rotate the letters so the text itself stays readable
+     while the ring around it keeps spinning */
+  animation: seal-counter-rotate 18s linear infinite;
+  transform-origin: center;
 }
 
-.user{
-background:#cce5ff;
-padding:8px;
-margin:5px;
-border-radius:5px;
-text-align:right;
+@keyframes seal-counter-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
 }
 
-.input-area{
-display:flex;
-border-top:1px solid #ddd;
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
 }
 
-input{
-flex:1;
-padding:10px;
-border:none;
+.logo-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
 }
 
-button{
-background:#002855;
-color:white;
-border:none;
-padding:10px;
-cursor:pointer;
+.logo-subtitle {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold-300);
+}
+
+/* --- Desktop nav links ---------------------------------------------------- */
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 2px;
+  transition: color 0.25s ease;
+}
+
+/* Animated underline: a scaled-down bar that grows on hover/active,
+   rather than a full border, so it never shifts layout. */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-500);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--white);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --- Right side: CTA + hamburger ------------------------------------------ */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-cta {
+  padding: 10px 22px;
+  font-size: 14px;
+}
+
+/* Hamburger: three bars that morph into an X via rotation/opacity.
+   Hidden on desktop, shown at the mobile breakpoint below. */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   4. MOBILE MENU
+   A panel that slides in from the right, plus a dimmed overlay behind it.
+   Both are toggled by adding/removing the "open" class in script.js.
+   ========================================================================== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(78vw, 340px);
+  background: linear-gradient(160deg, var(--navy-900), var(--navy-950));
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+
+  /* Off-screen by default; slides into view when .open is added */
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: center;
+}
+
+.mobile-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 22px;
+  font-family: var(--font-display);
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 19, 43, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile breakpoint: swap desktop links for the hamburger */
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-cta {
+    display: none; /* CTA reappears inside the mobile menu instead */
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ==========================================================================
+   5. HERO  (placeholder styling — upgraded in a later step)
+   ========================================================================== */
+.hero {
+  margin-top: var(--nav-height); /* clears the fixed navbar */
+  height: 60vh;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 40px;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #ffcc00;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   6. COURSES  (placeholder styling — upgraded in a later step)
+   ========================================================================== */
+.courses {
+  padding: 50px;
+  text-align: center;
+}
+
+.course-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--white);
+  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  width: 250px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden; /* keeps the top accent bar clipped to the rounded corners */
+  cursor: pointer;
+  /* Animate transform + shadow together for a smooth "lift" on hover */
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Thin gold accent bar across the top, hidden until hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-300));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.card h3 {
+  color: var(--navy-900);
+  font-family: var(--font-display);
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.card p {
+  color: var(--slate-600);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Lift the card, deepen its shadow, and reveal the accent bar on hover */
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lifted);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card:hover h3 {
+  color: var(--gold-500);
+}
+
+/* ==========================================================================
+   7. ABOUT  (placeholder styling — upgraded in a later step)
+   ========================================================================== */
+.about {
+  background: #f5f5f5;
+  padding: 40px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   7b. FOOTER
+   ========================================================================== */
+.site-footer {
+  background: var(--navy-950); /* deepest navy tone, reserved for the footer */
+  color: var(--ivory-50);
+  padding: 60px 40px 0;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  /* Brand column gets more room; the other 3 columns share the rest equally */
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-col h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.footer-col h4 {
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+/* Contact list: icon + text side by side */
+.footer-contact {
+  list-style: none;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+}
+
+.footer-contact svg {
+  flex-shrink: 0;
+  color: var(--gold-300);
+}
+
+.footer-contact a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--gold-300);
+}
+
+/* Quick links list */
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+/* Small underline that grows from left on hover, matching the navbar's motif */
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: var(--gold-300);
+  transition: width 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: var(--white);
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* Social icons row */
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ivory-50);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Lift + glow + fill gold on hover, each icon rotates slightly for a playful feel */
+.social-icon:hover {
+  background: var(--gold-500);
+  color: var(--navy-950);
+  transform: translateY(-4px) rotate(6deg);
+  box-shadow: 0 8px 18px rgba(212, 166, 42, 0.4);
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 0;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Stack footer columns on smaller screens */
+@media (max-width: 800px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   8. NOVA CHATBOT  (placeholder styling — upgraded in a later step)
+   ========================================================================== */
+#chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--navy-900);
+  color: white;
+  font-size: 24px;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 900;
+}
+
+#nova {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+  z-index: 900;
+}
+
+.chat-header {
+  background: var(--navy-900);
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-box {
+  height: 250px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.bot {
+  background: #eee;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.user {
+  background: #cce5ff;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  text-align: right;
+}
+
+.input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+}
+
+.input-area button {
+  background: var(--navy-900);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 }
