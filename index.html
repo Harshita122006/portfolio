@@ -1,112 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garden City University</title>
+
+<!-- Google Fonts: Fraunces (serif, for headings) + Inter (sans, for body/UI) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- NAVBAR -->
+  <!-- ================= NAVBAR ================= -->
+  <!-- data-scrolled is toggled by JS to shrink/tint the bar once the user scrolls -->
+  <nav id="navbar">
+    <div class="nav-inner">
 
-<nav>
-<h2>Garden City University</h2>
+      <!-- Logo: a small rotating "seal" ring + wordmark, our signature motif -->
+      <a href="#" class="logo" aria-label="Garden City University home">
+        <span class="seal" aria-hidden="true">
+          <svg viewBox="0 0 44 44" width="40" height="40">
+            <circle class="seal-ring" cx="22" cy="22" r="19" fill="none" stroke-width="1.5"/>
+            <circle class="seal-ring-dashed" cx="22" cy="22" r="15" fill="none" stroke-width="1" stroke-dasharray="2 4"/>
+            <text x="22" y="27" text-anchor="middle" class="seal-letters">GCU</text>
+          </svg>
+        </span>
+        <span class="logo-text">
+          <span class="logo-title">Garden City</span>
+          <span class="logo-subtitle">UNIVERSITY</span>
+        </span>
+      </a>
 
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Courses</a></li>
-<li><a href="#">Admissions</a></li>
-<li><a href="#">Contact</a></li>
-</ul>
-</nav>
+      <!-- Primary nav links (desktop) -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#courses" class="nav-link">Courses</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#admissions" class="nav-link">Admissions</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
 
-<!-- HERO SECTION -->
+      <div class="nav-right">
+        <a href="#admissions" class="btn btn-gold nav-cta">Apply Now</a>
 
-<section class="hero">
+        <!-- Hamburger button for mobile nav; animates into an X when open -->
+        <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
 
-<h1>Welcome to Garden City University</h1>
+  <!-- Mobile slide-in menu -->
+  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="#home" class="mobile-link">Home</a></li>
+      <li><a href="#courses" class="mobile-link">Courses</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#admissions" class="mobile-link">Admissions</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+    <a href="#admissions" class="btn btn-gold mobile-cta">Apply Now</a>
+  </div>
+  <!-- Dark overlay behind the mobile menu; clicking it closes the menu -->
+  <div id="menuOverlay" class="menu-overlay"></div>
 
-<p>Empowering students with knowledge, innovation and leadership.</p>
+  <!-- ================= HERO SECTION ================= -->
+  <section class="hero" id="home">
+    <h1>Welcome to Garden City University</h1>
+    <p>Empowering students with knowledge, innovation and leadership.</p>
+    <button>Apply Now</button>
+  </section>
 
-<button>Apply Now</button>
+  <!-- ================= COURSES ================= -->
+  <section class="courses" id="courses">
+    <h2>Our Popular Programs</h2>
+    <div class="course-container">
+      <div class="card">
+        <h3>BCA</h3>
+        <p>Learn programming, web development and software engineering.</p>
+      </div>
+      <div class="card">
+        <h3>BBA</h3>
+        <p>Build leadership and business management skills.</p>
+      </div>
+      <div class="card">
+        <h3>BCom</h3>
+        <p>Study accounting, finance and economics.</p>
+      </div>
+      <!-- Three additional programs -->
+      <div class="card">
+        <h3>BSc</h3>
+        <p>Explore science, mathematics and research-driven learning.</p>
+      </div>
+      <div class="card">
+        <h3>BA</h3>
+        <p>Study literature, psychology, history and the liberal arts.</p>
+      </div>
+      <div class="card">
+        <h3>MBA</h3>
+        <p>Advance your career with strategy, leadership and global business.</p>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about">
+    <h2>About Garden City University</h2>
+    <p>
+      Garden City University is one of Bangalore's leading institutions, providing
+      high-quality education and modern campus facilities.
+    </p>
+  </section>
 
-<!-- COURSES -->
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
 
-<section class="courses">
+      <!-- Column 1: brand + short blurb -->
+      <div class="footer-col footer-brand">
+        <h3>Garden City University</h3>
+        <p>Empowering students with knowledge, innovation and leadership since day one.</p>
+      </div>
 
-<h2>Our Popular Programs</h2>
+      <!-- Column 2: contact details -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>
+            <!-- Location pin icon -->
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/>
+              <circle cx="12" cy="10" r="2.5"/>
+            </svg>
+            <span>Bangalore, Karnataka, India</span>
+          </li>
+          <li>
+            <!-- Envelope icon -->
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+            <a href="mailto:info@gardencity.edu">info@gardencity.edu</a>
+          </li>
+          <li>
+            <!-- Phone icon -->
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.7a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>
+            </svg>
+            <span>+91 80 1234 5678</span>
+          </li>
+        </ul>
+      </div>
 
-<div class="course-container">
+      <!-- Column 3: quick links, reuse the same section anchors as the navbar -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#admissions">Admissions</a></li>
+        </ul>
+      </div>
 
-<div class="card">
-<h3>BCA</h3>
-<p>Learn programming, web development and software engineering.</p>
-</div>
+      <!-- Column 4: social icons -->
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <!-- Each icon is inline SVG (no external library), wrapped in a link -->
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.2-9.4L1 2h7l4.8 6.3L18.9 2z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.4c0-.9.3-1.6 1.7-1.6h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4v3.2H10V22h3.5z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.66 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-4V9z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
 
-<div class="card">
-<h3>BBA</h3>
-<p>Build leadership and business management skills.</p>
-</div>
+    </div>
 
-<div class="card">
-<h3>BCom</h3>
-<p>Study accounting, finance and economics.</p>
-</div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear"></span> Garden City University. All rights reserved.</p>
+    </div>
+  </footer>
 
-</div>
+  <!-- ================= NOVA CHATBOT ICON ================= -->
+  <div id="chatbot-icon" onclick="toggleNova()">
+    💬
+  </div>
 
-</section>
+  <!-- ================= NOVA CHATBOT ================= -->
+  <div id="nova">
+    <div class="chat-header">
+      Nova – University Assistant
+      <span onclick="toggleNova()">✖</span>
+    </div>
+    <div id="chatbox" class="chat-box">
+      <div class="bot">
+        Hello! I'm Nova 🤖 I can help you with admissions, courses, fees, hostel and location.
+      </div>
+    </div>
+    <div class="input-area">
+      <input id="userInput" placeholder="Ask Nova something...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
 
-<!-- ABOUT -->
-
-<section class="about">
-
-<h2>About Garden City University</h2>
-
-<p>
-Garden City University is one of Bangalore’s leading institutions,
-providing high-quality education and modern campus facilities.
-</p>
-
-</section>
-
-
-<!-- NOVA CHATBOT ICON -->
-
-<div id="chatbot-icon" onclick="toggleNova()">
-💬
-</div>
-
-
-<!-- NOVA CHATBOT -->
-
-<div id="nova">
-
-<div class="chat-header">
-Nova – University Assistant
-<span onclick="toggleNova()">✖</span>
-</div>
-
-<div id="chatbox" class="chat-box">
-<div class="bot">
-Hello! I'm Nova 🤖  
-I can help you with admissions, courses, fees, hostel and location.
-</div>
-</div>
-
-<div class="input-area">
-<input id="userInput" placeholder="Ask Nova something...">
-<button onclick="sendMessage()">Send</button>
-</div>
-
-</div>
-
-
-<!-- CONNECT JAVASCRIPT -->
-
-<script src="nova.js"></script>
-
+  <!-- CONNECT JAVASCRIPT -->
+  <script src="script.js"></script>
 </body>
 </html>
